@@ -1,0 +1,74 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool: "default"
+
+variables:
+- name: RG
+  value: 'yomanunsixsix'
+- name: RG_Location
+  value: 'eastus'
+- name: Vault
+  value: 'yomanunsixsixKeyVault'
+- name: AppConfig
+  value: 'yomanunsixsixAppConfiguration'
+- name: LogAnalytics
+  value: 'LogAnalytics'
+- name: InfrastructureFolder
+  value: 'CloudInfrastructure'
+- name: ApplicationInsight
+  value: 'ApplicationInsights'
+- name: BlobName
+  value: 'yomanunsixsixblobstore'
+- name: BlobContainer1
+  value: 'unvalidated'
+- name: BlobContainer2
+  value: 'validated'
+- name: SBusName
+  value: 'yomanunsixsixSb'
+- name: CosmosDBName
+  value: 'yomanunsixsixcosmos'
+- name: ContentName
+  value: 'yomanunsixsixContentSafety'
+- name: EventHubNamespace
+  value: 'cours4eventhubns'
+- name: EventHubName
+  value: 'cours4_events'
+
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'ARM Deployment'
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Azure subscription 2(564ce5bd-33c8-4554-ad6e-806f11d688e1)'
+    subscriptionId: '564ce5bd-33c8-4554-ad6e-806f11d688e1'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(RG)'
+    location: '$(RG_Location)'
+    templateLocation: 'Linked artifact'
+    csmFile: '$(Build.SourcesDirectory)\$(InfrastructureFolder)\azuredeploy.json'
+    csmParametersFile: '$(Build.SourcesDirectory)\$(InfrastructureFolder)\azuredeploy.parameters.json'
+    overrideParameters: >
+        -ContentSafetyname $(ContentName)
+        -NoSQLname $(CosmosDBName)
+        -ServiceBusName $(SBusName)
+        -location $(RG_Location)
+        -VaultName $(Vault)
+        -AppConfigName $(AppConfig)
+        -LogAnalyticsName $(LogAnalytics)
+        -ApplicationInsightName $(ApplicationInsight)
+        -storageAccountName $(BlobName)
+        -storageBlobContainerName1 $(BlobContainer1)
+        -storageBlobContainerName2 $(BlobContainer2)
+        -EventHubNamespaceName $(EventHubNamespace)
+        -EventHubName $(EventHubName)
+      deploymentMode: 'Incremental'
+      deploymentOutputs: 'Deployment1'
+
+  - script: |
+      echo $(Deployment1)

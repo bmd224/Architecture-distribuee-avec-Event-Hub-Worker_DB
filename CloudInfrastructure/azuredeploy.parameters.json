@@ -1,0 +1,153 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "eastus"
+    },
+    "VaultName": {
+      "value": "yomanunsixsixKeyVault"
+    },
+
+    "EventHubNamespaceName": {
+      "value": "cours4eventhubns"
+    },
+    "EventHubName": {
+      "value": "cours4_events"
+    },
+
+    "AppConfigName": {
+      "value": "yomanunsixsixAppConfiguration"
+    },
+    "LogAnalyticsName": {
+      "value": "LogAnalytics"
+    },
+    "ApplicationInsightName": {
+      "value": "ApplicationInsights"
+    },
+    "ServiceBusName": {
+      "value": "yomanunsixsixSb"
+    },
+    "NoSQLname": {
+      "value": "yomanunsixsixcosmos"
+    },
+    "storageAccountName": {
+      "value": "yomanunsixsixblobstore"
+    },
+    "storageBlobContainerName1": {
+      "value": "unvalidated"
+    },
+    "storageBlobContainerName2": {
+      "value": "validated"
+    },
+    "accountType": {
+      "value": "Standard_LRS"
+    },
+    "kind": {
+      "value": "StorageV2"
+    },
+    "minimumTlsVersion": {
+      "value": "TLS1_2"
+    },
+    "supportsHttpsTrafficOnly": {
+      "value": true
+    },
+    "allowBlobPublicAccess": {
+      "value": true
+    },
+    "allowSharedKeyAccess": {
+      "value": true
+    },
+    "defaultOAuth": {
+      "value": false
+    },
+    "accessTier": {
+      "value": "Hot"
+    },
+    "publicNetworkAccess": {
+      "value": "Enabled"
+    },
+    "allowCrossTenantReplication": {
+      "value": false
+    },
+    "networkAclsBypass": {
+      "value": "AzureServices"
+    },
+    "networkAclsDefaultAction": {
+      "value": "Allow"
+    },
+    "networkAclsIpRules": {
+      "value": []
+    },
+    "dnsEndpointType": {
+      "value": "Standard"
+    },
+    "largeFileSharesState": {
+      "value": "Enabled"
+    },
+    "keySource": {
+      "value": "Microsoft.Storage"
+    },
+    "encryptionEnabled": {
+      "value": true
+    },
+    "keyTypeForTableAndQueueEncryption": {
+      "value": "Account"
+    },
+    "infrastructureEncryptionEnabled": {
+      "value": false
+    },
+    "AzureAdClientId": {
+      "value": "49b8dde5-2dda-4a7c-b316-fb4f6a16912b"
+    },
+    "AzureAdDomainName": {
+      "value": "yomanunsixsixdem0180.onmicrosoft.com"
+    },
+    "ContentSafetyname": {
+      "value": "yomanunsixsixContentSafety"
+    },
+    "resourceGroupName": {
+      "value": "yomanunsixsix"
+    },
+    "sku": {
+      "value": "F0"
+    },
+    "tagValues": {
+      "value": {}
+    },
+    "virtualNetworkType": {
+      "value": "None"
+    },
+    "vnet": {
+      "value": {}
+    },
+    "ipRules": {
+      "value": []
+    },
+    "identity": {
+      "value": {
+        "type": "SystemAssigned"
+      }
+    },
+    "privateEndpoints": {
+      "value": []
+    },
+    "privateDnsZone": {
+      "value": "[$item.privateDnsZoneConfiguration.integrateWithPrivateDnsZone]"
+    },
+    "isCommitmentPlanForDisconnectedContainerEnabled": {
+      "value": false
+    },
+    "commitmentPlanForDisconnectedContainer": {
+      "value": {
+        "current": {
+          "count": 9
+        },
+        "hostingModel": "DisconnectedContainer",
+        "planType": "Lenovo",
+        "autoRenew": true
+      }
+    }
+
+  }
+}

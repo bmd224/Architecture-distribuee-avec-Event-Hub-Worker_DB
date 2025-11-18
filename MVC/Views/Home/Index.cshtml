@@ -1,0 +1,36 @@
+﻿@model ApplicationConfiguration
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using MVC.Controllers;
+
+<div class="text-center">
+    <h1 class="display-4" style="color: @Model.FontColor; font-size: @Model.FontSize px;">@Model.WelcomePhrase</h1>
+</div>
+
+<feature name="FeatureA">
+    <p>This can only be seen if 'FeatureA' is enabled.</p>
+</feature>
+
+<feature name="FeatureB">
+    <p>This can only be seen if 'FeatureB' is enabled.</p>
+</feature>
+
+@* <feature name="FeatureC">
+    <p>This can only be seen if 'FeatureC' is enabled.</p>
+</feature> *@
+
+@if (User.Identity!.IsAuthenticated)
+{
+    var getUser = @HomeController.GetUserOnAzureAd(User);
+
+    <h4> Azure AD User name: @getUser.user_name </h4>
+    <h4> Azure AD Email: @getUser.user_email </h4>
+    <h4> Azure AD User domain: @getUser.user_domain</h4>
+
+    <a class="btn btn-danger" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+    </a>
+}

@@ -1,0 +1,48 @@
+﻿@model MVC.Models.Comment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@using MVC.Controllers;
+
+<h1>Create</h1>
+
+<h4>Comment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Commentaire" class="control-label"></label>
+                <input asp-for="Commentaire" class="form-control" />
+                <span asp-validation-for="Commentaire" class="text-danger"></span>
+            </div>
+            @{
+                var getUser = HomeController.GetUserOnAzureAd(User);
+
+                <div class="mb-3">
+                    <label asp-for="User" class="control-label"></label>
+                    <input asp-for="User" class="form-control" value ="@getUser.user_email" readonly/>
+                    <span asp-validation-for="User" class="text-danger"></span>
+                </div>
+            }
+            
+            @* Hidden Field to bring back the postId *@
+            <input type="hidden" asp-for="PostId" value="@ViewData["PostId"]" />
+
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

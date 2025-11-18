@@ -1,0 +1,63 @@
+﻿@model MVC.Models.PostForm
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@using MVC.Controllers;
+
+<h1>Create</h1>
+
+<h4>Post</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            @* 
+                #https://stackoverflow.com/questions/48709207/selectlist-from-enum-net-core
+                #https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.getenumselectlist?view=aspnetcore-7.0 
+            *@
+
+            <div class="mb-3">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" asp-items="Html.GetEnumSelectList<MVC.Models.Category>()"></select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            @{
+                var getUser = @HomeController.GetUserOnAzureAd(User);
+
+                <div class="mb-3">
+                    <label asp-for="User" class="control-label"></label>
+                    <input asp-for="User" class="form-control" value="@getUser.user_email" readonly />
+                    <span asp-validation-for="User" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="mb-3">
+                <label asp-for="FileToUpload" class="control-label"></label>
+                <input asp-for="FileToUpload" class="form-control" type="file" />
+                <span asp-validation-for="FileToUpload" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
