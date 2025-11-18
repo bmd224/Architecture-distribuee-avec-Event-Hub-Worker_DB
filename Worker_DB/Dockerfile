@@ -6,9 +6,9 @@ USER $APP_UID
 WORKDIR /app
 
 # Pour le managed identity
-ENV AZURE_CLIENT_ID=${AZURE_CLIENT_SECRET}
+ENV AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
 ENV AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
-ENV AZURE_TENANT_ID=${AZURE_CLIENT_SECRET}
+ENV AZURE_TENANT_ID=${AZURE_TENANT_ID}
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
